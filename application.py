@@ -1,27 +1,4 @@
-import flask
-import os
-from datetime import datetime as dt
+from german_quiz_app.application import app
 
-app = flask.Flask(__name__)
-
-# Only enable Flask debugging if an env var is set to true
-app.debug = os.environ.get('FLASK_DEBUG') in ['true', 'True']
-
-# Get application version from env
-app_version = os.environ.get('APP_VERSION')
-
-# Get cool new feature flag from env
-enable_cool_new_feature = os.environ.get('ENABLE_COOL_NEW_FEATURE') in ['true', 'True']
-
-@app.route('/')
-def hello_world():
-    message = "Hello, world!"
-    return flask.render_template('index.html',
-                                  title=message,
-                                  date_today=dt.now().strftime("%Y-%m-%d"),
-                                  flask_debug=app.debug,
-                                  app_version=app_version,
-                                  enable_cool_new_feature=enable_cool_new_feature)
- 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
