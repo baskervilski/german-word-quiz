@@ -1,6 +1,6 @@
 
 import flask
-from .application import app
+from german_quiz_app.application import app
 from datetime import datetime as dt
 
 

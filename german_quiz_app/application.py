@@ -12,7 +12,7 @@ app.config['APP_VERSION'] = os.environ.get('APP_VERSION')
 # Get cool new feature flag from env
 app.config['enable_cool_new_feature'] = os.environ.get('ENABLE_COOL_NEW_FEATURE') in ['true', 'True']
 
-from . import views
+from german_quiz_app import views
  
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
