@@ -1,6 +1,7 @@
 import flask
 import os
- 
+from datetime import datetime as dt
+
 app = flask.Flask(__name__)
 
 # Only enable Flask debugging if an env var is set to true
@@ -17,6 +18,7 @@ def hello_world():
     message = "Hello, world!"
     return flask.render_template('index.html',
                                   title=message,
+                                  date_today=dt.now().strftime("%Y-%m-%d"),
                                   flask_debug=app.debug,
                                   app_version=app_version,
                                   enable_cool_new_feature=enable_cool_new_feature)
