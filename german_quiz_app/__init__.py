@@ -1,5 +1,12 @@
 import flask
 import os
+import boto3
+
+dynamodb = boto3.resource('dynamodb', region_name='eu-central-1')
+
+table = dynamodb.Table('german_quiz')
+
+table.put_item(Item={'phrase_de': 'Vorhersage', 'phrase_en': 'Prediction'})
 
 app = flask.Flask(__name__)
 
