@@ -1,7 +1,7 @@
 import flask
 import os
 import boto3
-import .config as cfg
+import german_quiz_app.config as cfg
 
 dynamodb = boto3.resource("dynamodb", region_name=cfg.AWS_REGION)
 
