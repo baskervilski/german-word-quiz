@@ -1,3 +1,5 @@
+import os
+
 DICT_TABLE = "german_quiz"
 AWS_REGION = "eu-central-1"
 
