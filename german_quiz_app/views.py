@@ -33,6 +33,6 @@ def upload_new():
     return request.json, 201
     
 
-@app.route("/show_dict", methods=['POST'])
+@app.route("/show_dict")
 def show_dict():
-    return jsonify(table.scan()['Items'])
+    return pd.DataFrame(table.scan()['Items']).to_html()
