@@ -4,7 +4,7 @@
     {{ super() }}
 
     <script>
-        var upload_url = "http://localhost:5000/upload_new"
+        var upload_url = "http://{{ api_endpoint }}/upload_new"
         
         function get_payload() {
             var payload = {

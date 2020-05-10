@@ -21,7 +21,7 @@ def hello_world():
 
 @app.route("/input")
 def input():
-    return render_template("input.html")
+    return render_template("input.html", api_endpoint=app.config['API_ENDPOINT'])
 
 
 @app.route("/upload_new", methods=['POST'])

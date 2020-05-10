@@ -2,12 +2,14 @@ import flask
 import os
 import boto3
 import german_quiz_app.config as cfg
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 dynamodb = boto3.resource("dynamodb", region_name=cfg.AWS_REGION)
 
 table = dynamodb.Table(cfg.DICT_TABLE)
-
-table.put_item(Item={"phrase_de": "Vorhersage", "phrase_en": "Prediction"})
 
 app = flask.Flask(__name__)
 
@@ -15,7 +17,8 @@ app = flask.Flask(__name__)
 app.debug = os.environ.get("FLASK_DEBUG") in ["true", "True"]
 
 # Get application version from env
-app.config["APP_VERSION"] = os.environ.get("APP_VERSION")
+app.config["APP_VERSION"] = os.getenv("APP_VERSION")
+app.config['API_ENDPOINT'] = os.getenv('API_ENDPOINT')
 
 from german_quiz_app import views
 
