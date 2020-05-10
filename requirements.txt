@@ -1,4 +1,4 @@
 Flask
 boto3
 connexion[swagger-ui]==2.0
-python-dotenv==0.13.0
+pandas
