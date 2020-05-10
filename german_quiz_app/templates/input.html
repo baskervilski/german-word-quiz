@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+
+    <script>
+        var upload_url = "http://localhost:5000/upload_new"
+        
+        function get_payload() {
+            var payload = {
+            'phrase_de': $("#de_expression").val(),
+            'phrase_en': $("#en_expression").val()
+            }
+            return payload
+        }
+
+        function send_new_expressions() {
+
+            payload = get_payload()
+
+            res = $.ajax(
+                upload_url, 
+                {
+                    data : JSON.stringify(payload),
+                    contentType : 'application/json',
+                    type : 'POST'
+                }
+            )
+
+            return res
+        }
+        
+    </script>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <div class='row'>
+        <div class='col-sm-2'>
+            German expression
+            <input type='text' id='de_expression'>
+        </div>
+        <div class='col-sm-2'>
+            English expression
+            <input type='text' id='en_expression'>
+        </div>
+        <div class='col-sm-2'>
+            <button onclick="send_new_expressions()" id="btnUpload" type="button">UPLOAD</button> 
+        </div>
+    </div>
+    
+{% endblock %}
