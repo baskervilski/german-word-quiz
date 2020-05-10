@@ -2,7 +2,7 @@ import flask
 from german_quiz_app import app
 from german_quiz_app import table
 from datetime import datetime as dt
-from flask import render_template, request, jsonify, abort
+from flask import render_template, request, jsonify, abort, url_for, redirect
 
 import pandas as pd
 
@@ -29,11 +29,10 @@ def upload_new():
     if not request.json:
         abort(400)
 
-    if 0:
-        return request.json, 201
-    else:
-        #en = request.args.get('en')
-        #de = request.args.get('de')
-        table.put_item(Item=request.json)
-        return jsonify(table.scan()['Items'])
+    table.put_item(Item=request.json)
+    return request.json, 201
+    
 
+@app.route("/show_dict", methods=['POST'])
+def show_dict():
+    return jsonify(table.scan()['Items'])
