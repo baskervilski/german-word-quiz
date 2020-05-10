@@ -2,3 +2,4 @@ Flask
 boto3
 connexion[swagger-ui]==2.0
 pandas
+python-dotenv
