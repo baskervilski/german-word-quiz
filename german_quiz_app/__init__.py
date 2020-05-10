@@ -5,7 +5,7 @@ import german_quiz_app.config as cfg
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 dynamodb = boto3.resource("dynamodb", region_name=cfg.AWS_REGION)
 
@@ -18,7 +18,7 @@ app.debug = os.environ.get("FLASK_DEBUG") in ["true", "True"]
 
 # Get application version from env
 app.config["APP_VERSION"] = os.getenv("APP_VERSION")
-app.config['API_ENDPOINT'] = os.getenv('API_ENDPOINT')
+app.config['API_ENDPOINT'] = cfg.API_ENDPOINT
 
 from german_quiz_app import views
 
