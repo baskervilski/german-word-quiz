@@ -1,23 +1,21 @@
-import flask
+from flask import Flask
 import os
-import boto3
-import german_quiz_app.config as cfg
+from flask_sqlalchemy import SQLAlchemy
 
-dynamodb = boto3.resource("dynamodb", region_name=cfg.AWS_REGION)
-table = dynamodb.Table(cfg.DICT_TABLE)
-app = flask.Flask(__name__)
+# Globally accessible libraries
+db = SQLAlchemy()
 
-# Only enable Flask debugging if an env var is set to true
-app.debug = os.environ.get("FLASK_DEBUG") in ["true", "True"]
+def create_app():
+    app: Flask = Flask(__name__)
+    app.config.from_object('config.Config')
 
-# Get application version from env
-app.config["APP_VERSION"] = os.getenv("APP_VERSION")
-app.config['API_ENDPOINT'] = cfg.API_ENDPOINT
-app.config["FLASK_ENDPOINT_HOST"] = cfg.FLASK_ENDPOINT_HOST
-app.config['FLASK_ENDPOINT_PORT'] = cfg.FLASK_ENDPOINT_PORT
+    # Initialize plugins
+    db.init_app(app)
 
-from german_quiz_app import views   
+    with app.app_context():
+        from german_quiz_app import routes   
 
-if __name__ == "__main__":
-    
-    app.run(host=app.config["FLASK_ENDPOINT_HOST"], port=app.config['FLASK_ENDPOINT_PORT'])
+        # Register blueprints
+        # app.register_blueprint(auth.auth_bp)
+
+        return app
